@@ -1,0 +1,25 @@
+meta {
+  name: Crea Pacco (Admin)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/admin/packages
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+  X-Admin-Key: {{adminKey}}
+}
+
+body:json {
+  {
+    "recipient_name": "Marco",
+    "recipient_surname": "Verdi",
+    "pickup_point_id": 3
+  }
+}

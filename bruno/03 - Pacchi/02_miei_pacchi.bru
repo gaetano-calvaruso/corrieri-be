@@ -1,0 +1,19 @@
+meta {
+  name: I Miei Pacchi Ritirati
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/my-packages
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+headers {
+  Accept: application/json
+}

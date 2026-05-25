@@ -1,0 +1,29 @@
+meta {
+  name: Aggiorna Profilo
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{baseUrl}}/api/profile
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "name": "Giulia",
+    "surname": "Bianchi",
+    "phone": "347 9998887",
+    "address": "Via Nazionale 99, Roma"
+  }
+}

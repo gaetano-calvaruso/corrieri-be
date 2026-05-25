@@ -1,0 +1,21 @@
+meta {
+  name: Lista Punti di Ritiro
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/pickup-points
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+}
+
+query {
+  ~courier: BRT
+  ~city: Roma
+  ~search: tiburtina
+}

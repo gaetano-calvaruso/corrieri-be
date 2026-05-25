@@ -1,0 +1,19 @@
+meta {
+  name: Lista - Filtra per Corriere
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/pickup-points
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+}
+
+query {
+  courier: DHL
+}

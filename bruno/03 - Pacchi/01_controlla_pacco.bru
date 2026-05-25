@@ -1,0 +1,27 @@
+meta {
+  name: Controlla e Ritira Pacco
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/packages/check
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "tracking_code": "SOSTITUISCI_CON_CODICE_REALE",
+    "pickup_point_id": 1
+  }
+}

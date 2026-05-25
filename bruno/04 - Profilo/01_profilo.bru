@@ -1,0 +1,19 @@
+meta {
+  name: Dettaglio Profilo
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/profile
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+headers {
+  Accept: application/json
+}
