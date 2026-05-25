@@ -41,5 +41,6 @@ Route::middleware('auth.jwt')->group(function () {
 
 // ── Rotte di servizio (admin) ─────────────────────────────────────────────────
 Route::middleware('admin.key')->prefix('admin')->group(function () {
+    Route::get('packages',  [PackageController::class, 'adminIndex']);
     Route::post('packages', [PackageController::class, 'store']);
 });

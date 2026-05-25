@@ -1,0 +1,23 @@
+meta {
+  name: Lista Pacchi (Admin)
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/admin/packages
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+  X-Admin-Key: {{adminKey}}
+}
+
+query {
+  ~status: pending
+  ~pickup_point_id: 1
+  ~courier: BRT
+  ~search: Rossi
+}

@@ -75,6 +75,48 @@ class PackageController extends Controller
     }
 
     // Endpoint di servizio (admin) – protetto da API key
+    public function adminIndex(Request $request): JsonResponse
+    {
+        $request->validate([
+            'status'          => 'nullable|in:pending,collected,expired',
+            'pickup_point_id' => 'nullable|integer|exists:pickup_points,id',
+            'courier'         => 'nullable|in:BRT,DHL,SDA',
+            'search'          => 'nullable|string|max:100',
+        ]);
+
+        $query = Package::with('pickupPoint:id,courier,name,address,city,province');
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        } else {
+            $query->where('status', 'pending');
+        }
+
+        if ($request->filled('pickup_point_id')) {
+            $query->where('pickup_point_id', $request->pickup_point_id);
+        }
+
+        if ($request->filled('courier')) {
+            $query->whereHas('pickupPoint', fn($q) => $q->where('courier', $request->courier));
+        }
+
+        if ($request->filled('search')) {
+            $term = $request->search;
+            $query->where(function ($q) use ($term) {
+                $q->where('tracking_code', 'like', "%{$term}%")
+                  ->orWhere('recipient_name', 'like', "%{$term}%")
+                  ->orWhere('recipient_surname', 'like', "%{$term}%");
+            });
+        }
+
+        $packages = $query->orderBy('created_at')->get();
+
+        return response()->json([
+            'data'  => $packages,
+            'total' => $packages->count(),
+        ]);
+    }
+
     public function store(Request $request): JsonResponse
     {
         $data = $request->validate([
